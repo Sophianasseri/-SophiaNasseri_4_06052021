@@ -55,32 +55,53 @@ const minLength = (length) => {
 // Email Regex
 
 const isEmailValid = (email) => {
-  if (
-    !value.match(
-      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-    )
-  ) {
-    return false;
-  } else {
-    return true;
-  }
+  const regex =
+    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  return regex.test(email)
 };
 
-const textError = (message) => {
-  const error = document.querySelector(".error");
-  console.log(error);
-  error.textContent = message;
+const textError = (tag, message) => {
+  const span = document.querySelector("." + tag + "-container > span");
+  span.textContent = message;
 };
 
+//First name validation
 const checkFirstName = () => {
   let valid = false;
+  const firstNameField = firstName.value;
 
-  const name = firstName.value;
+  if (!isRequired(firstNameField)) {
+    textError("firstname", "Veuillez entrer un prénom");
+  } else if (!minLength(firstNameField.length)) {
+    textError("firstname", "Veuillez entrer 2 caractères minimum ");
+  } else {
+    valid = true;
+  }
+  return valid;
+};
 
-  if (!isRequired(name)) {
-    textError("Veuillez entrer un prénom");
-  } else if (!minLength(name.length)) {
-    textError("Veuillez entrer 2 caractères minimum ");
+const checkLastName = () => {
+  let valid = false;
+  const lastNameField = lastName.value;
+
+  if (!isRequired(lastNameField)) {
+    textError("lastname", "Veuillez entrer un nom");
+  } else if (!minLength(lastNameField.length)) {
+    textError("lastname", "Veuillez entrer 2 caractères minimum ");
+  } else {
+    valid = true;
+  }
+  return valid;
+};
+
+const checkEmail = () => {
+  let valid = false;
+  const emailField = email.value;
+
+  if (!isRequired(emailField)) {
+    textError("email", "Veuillez entrer un e-mail");
+  } else if (!isEmailValid(emailField)) {
+    textError("email", "Veuillez entrer un email valide");
   } else {
     valid = true;
   }
@@ -97,4 +118,6 @@ form.addEventListener("submit", (e) => {
 });
 function validate() {
   checkFirstName();
+  checkLastName();
+  checkEmail();
 }
