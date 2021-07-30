@@ -18,7 +18,15 @@ const form = document.getElementById("suscribe");
 const firstName = document.getElementById("first");
 const lastName = document.getElementById("last");
 const email = document.getElementById("email");
+const birthDate = document.getElementById("birthdate");
 const quantity = document.getElementById("quantity");
+ const location1 = document.getElementById("location1");
+const location2 = document.getElementById("location2");
+const location3 = document.getElementById("location3");
+const location4 = document.getElementById("location4");
+const location5 = document.getElementById("location5");
+const location6 = document.getElementById("location6");
+const checkbox = document.getElementById("checkbox1");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -53,21 +61,19 @@ const minLength = (length) => {
 };
 
 // Email Regex
-
 const isEmailValid = (email) => {
   const regex =
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  return regex.test(email)
+  return regex.test(email);
 };
 
 const textError = (tag, message) => {
-  const span = document.querySelector("." + tag + "-container > span");
+  const span = document.querySelector("." + tag + "-container .error");
   span.textContent = message;
 };
 
 //First name validation
 const checkFirstName = () => {
-  let valid = false;
   const firstNameField = firstName.value;
 
   if (!isRequired(firstNameField)) {
@@ -75,13 +81,11 @@ const checkFirstName = () => {
   } else if (!minLength(firstNameField.length)) {
     textError("firstname", "Veuillez entrer 2 caractères minimum ");
   } else {
-    valid = true;
+    textError("firstname", "");
   }
-  return valid;
 };
 
 const checkLastName = () => {
-  let valid = false;
   const lastNameField = lastName.value;
 
   if (!isRequired(lastNameField)) {
@@ -89,23 +93,57 @@ const checkLastName = () => {
   } else if (!minLength(lastNameField.length)) {
     textError("lastname", "Veuillez entrer 2 caractères minimum ");
   } else {
-    valid = true;
+    textError("lastname", "");
   }
-  return valid;
 };
 
 const checkEmail = () => {
-  let valid = false;
   const emailField = email.value;
-
   if (!isRequired(emailField)) {
     textError("email", "Veuillez entrer un e-mail");
   } else if (!isEmailValid(emailField)) {
     textError("email", "Veuillez entrer un email valide");
   } else {
-    valid = true;
+    textError("email", "");
   }
-  return valid;
+};
+
+const checkBirthDate = () => {
+  const dateField = birthDate.value;
+  if (!isRequired(dateField)) {
+    textError("birthdate", "Veuillez entrer une date de naissance");
+  } else {
+    textError("birthdate", "");
+  }
+};
+const checkQuantity = () => {
+  const quantityField = quantity.value;
+  if (!isRequired(quantityField)) {
+    textError("quantity", "Veuillez entrer un nombre");
+  } else {
+    textError("quantity", "");
+  }
+};
+const checkRadio = () => {
+  if (
+     location1.checked == false &&
+     location2.checked == false &&
+     location3.checked == false &&
+     location4.checked == false &&
+     location5.checked == false &&
+     location6.checked == false
+  ) {
+    textError("radio", "Veuillez sélectionner une ville");
+  } else {
+    textError("radio", "");
+  }
+};
+const checkCheckbox = () => {
+  if (!checkbox.checked) {
+    textError("checkbox", "Veuillez accepter  les conditions d'utilisation");
+  } else {
+    textError("checkbox", "");
+  }
 };
 
 form.addEventListener("submit", (e) => {
@@ -120,4 +158,8 @@ function validate() {
   checkFirstName();
   checkLastName();
   checkEmail();
+  checkBirthDate();
+  checkQuantity();
+  checkRadio();
+  checkCheckbox();
 }
