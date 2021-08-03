@@ -15,12 +15,13 @@ const closeModal = document.querySelector(".close");
 const form = document.getElementById("suscribe");
 
 // Form fields
+const inputTextType = document.querySelectorAll(".text-control");
 const firstName = document.getElementById("first");
 const lastName = document.getElementById("last");
 const email = document.getElementById("email");
 const birthDate = document.getElementById("birthdate");
 const quantity = document.getElementById("quantity");
- const location1 = document.getElementById("location1");
+const location1 = document.getElementById("location1");
 const location2 = document.getElementById("location2");
 const location3 = document.getElementById("location3");
 const location4 = document.getElementById("location4");
@@ -59,6 +60,18 @@ const minLength = (length) => {
     return true;
   }
 };
+const border = () => {
+  const inputs = Array.from(inputTextType);
+  inputs.map((input) => {
+    if (input.value === "") {
+      input.classList.add("input-border");
+    } else {
+      input.classList.remove("input-border");
+    }
+  });
+};
+
+// inputs.forEach((input) => input.classList.add("input-border"));
 
 // Email Regex
 const isEmailValid = (email) => {
@@ -126,12 +139,12 @@ const checkQuantity = () => {
 };
 const checkRadio = () => {
   if (
-     location1.checked == false &&
-     location2.checked == false &&
-     location3.checked == false &&
-     location4.checked == false &&
-     location5.checked == false &&
-     location6.checked == false
+    location1.checked == false &&
+    location2.checked == false &&
+    location3.checked == false &&
+    location4.checked == false &&
+    location5.checked == false &&
+    location6.checked == false
   ) {
     textError("radio", "Veuillez sélectionner une ville");
   } else {
@@ -162,4 +175,5 @@ function validate() {
   checkQuantity();
   checkRadio();
   checkCheckbox();
+  border();
 }
