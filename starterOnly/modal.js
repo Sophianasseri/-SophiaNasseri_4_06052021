@@ -46,6 +46,8 @@ closeModal.addEventListener("click", () => {
 // Form submit validation
 
 const validate = (event) => {
+  event.preventDefault();
+
   const isRequired = (value) => {
     if (value === "") {
       return false;
@@ -75,66 +77,70 @@ const validate = (event) => {
   };
 
   const inputs = Array.from(inputTextType);
-  inputs.map((input, index) => {
-    console.log(index);
+  inputs.map((input) => {
     if (input.value === "" || input.value.length < 2 || !isEmailValid()) {
-      input.classList.add("input-border");
+      input.parentElement.setAttribute("data-error", "");
     } else {
-      input.classList.remove("input-border");
-      return true;
+      input.parentElement.removeAttribute("data-error", "");
     }
   });
 
-  //First name validation
+  //Input validation
+
+  let valid = false;
 
   const firstNameField = firstName.value;
 
   if (!isRequired(firstNameField)) {
     textError("firstname", "Veuillez entrer un prénom");
-    event.preventDefault();
+    valid = false;
   } else if (!minLength(firstNameField.length)) {
     textError("firstname", "Veuillez entrer 2 caractères minimum ");
-    event.preventDefault();
   } else {
     textError("firstname", "");
+    valid = true;
   }
 
   const lastNameField = lastName.value;
 
   if (!isRequired(lastNameField)) {
     textError("lastname", "Veuillez entrer un nom");
-    event.preventDefault();
+    valid = false;
   } else if (!minLength(lastNameField.length)) {
     textError("lastname", "Veuillez entrer 2 caractères minimum ");
-    event.preventDefault();
+    valid = false;
   } else {
+    valid = true;
     textError("lastname", "");
   }
 
   const emailField = email.value;
   if (!isRequired(emailField)) {
     textError("email", "Veuillez entrer un e-mail");
-    event.preventDefault();
+    valid = false;
   } else if (!isEmailValid(emailField)) {
     textError("email", "Veuillez entrer un email valide");
-    event.preventDefault();
+    valid = false;
   } else {
+    valid = true;
     textError("email", "");
   }
 
   const dateField = birthDate.value;
   if (!isRequired(dateField)) {
     textError("birthdate", "Veuillez entrer une date de naissance");
-    event.preventDefault();
+    valid = false;
   } else {
+    valid = true;
     textError("birthdate", "");
   }
 
   const quantityField = quantity.value;
   if (!isRequired(quantityField)) {
     textError("quantity", "Veuillez entrer un nombre");
-    event.preventDefault();
+    valid = false;
   } else {
+    valid = true;
     textError("quantity", "");
   }
 
@@ -147,14 +153,30 @@ const validate = (event) => {
     location6.checked == false
   ) {
     textError("radio", "Veuillez sélectionner une ville");
-    event.preventDefault();
+    valid = false;
   } else {
     textError("radio", "");
   }
   if (!checkbox.checked) {
     textError("checkbox", "Veuillez accepter  les conditions d'utilisation");
-    event.preventDefault();
+    valid = false;
   } else {
     textError("checkbox", "");
+  }
+
+  if (valid === true) {
+    form.style.visibility = "hidden";
+    const closeBtn = document.querySelector(".btn-close");
+    closeBtn.style.display = "block";
+    const validationMessage = document.querySelector(".validation-message");
+    validationMessage.innerHTML =
+      "<p> Merci! <br> Votre réservation a été reçue.</p>";
+    closeBtn.addEventListener("click", () => {
+      modalbg.style.display = "none";
+      closeBtn.style.display = "none";
+      validationMessage.style.display = "none";
+      form.style.visibility = "visible";
+      form.reset();
+    });
   }
 };

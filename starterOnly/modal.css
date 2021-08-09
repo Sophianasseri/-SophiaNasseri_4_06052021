@@ -187,6 +187,7 @@ main {
 .modal-body {
   padding: 15px 8%;
   margin: 15px auto;
+  position: relative;
 }
 
 label {
@@ -222,7 +223,8 @@ input {
 .formData[data-error-visible="true"]::after {
   opacity: 1;
 }
-.input-border {
+.formData[data-error] .text-control {
+  
   border: 2px solid #e54858;
 }
 
@@ -299,6 +301,7 @@ input {
   opacity: 1;
   cursor: pointer;
   transform: scale(0.7);
+  z-index: 1;
 }
 .close:before,
 .close:after {
@@ -316,7 +319,8 @@ input {
   transform: rotate(-45deg);
 }
 .btn-submit,
-.btn-signup {
+.btn-signup,
+.btn-close {
   background: #fe142f;
   display: block;
   margin: 0 auto;
@@ -326,6 +330,13 @@ input {
   color: #fff;
   cursor: pointer;
   border: 0;
+}
+
+.btn-close {
+  position: absolute;
+  bottom: 2%;
+  left: 25%;
+  display: none;
 }
 /* custom select styles */
 .custom-select {
@@ -383,6 +394,16 @@ input {
   right: 0;
   z-index: 99;
 }
+
+.validation-message {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-45%);
+  left: 15%;
+  text-align: center;
+  margin: 1rem
+}
+
 
 /* Hide the items when the select box is closed: */
 .select-hide {
