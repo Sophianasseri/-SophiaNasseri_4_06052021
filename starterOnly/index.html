@@ -65,7 +65,7 @@
               onsubmit="return validate(event)"
             novalidate
             >
-              <div class="formData firstname-container">
+              <div class="formData">
                 <label for="first">Prénom</label><br>
                 <input
                   class="text-control"
@@ -74,10 +74,9 @@
                   name="first"
                   autocomplete="off"
                 /><br>
-                <span class="error"></span>
               </div>
               <div
-                class="formData lastname-container">
+                class="formData">
                 <label for="last">Nom</label><br>
                 <input
                   class="text-control"
@@ -86,10 +85,9 @@
                   name="last"
                   autocomplete="off"
                 /><br>
-                <span class="error"></span>
               </div>
               <div
-                class="formData email-container">
+                class="formData">
                 <label for="email">E-mail</label><br>
                 <input
                   class="text-control"
@@ -98,10 +96,9 @@
                   name="email"
                   autocomplete="off"
                 /><br>
-                <span class="error"></span>
               </div>
               <div
-                class="formData birthdate-container">
+                class="formData">
                 <label for="birthdate">Date de naissance</label><br>
                 <input
                   class="text-control"
@@ -110,17 +107,15 @@
                   name="birthdate"
                   autocomplete="off"
                 /><br>
-                <span class="error"></span>
               </div>
               <div
-                class="formData quantity-container">
+                class="formData">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
-                <span class="error"></span>
               </div>
               <p class="text-label">Quelles villes ?</p>
               <div
-                class="formData radio-container">
+                class="formData">
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -187,15 +182,15 @@
                   <span class="checkbox-icon"></span>
                   Portland</label
                 >
-                <span class="error"></span>
               </div>
 
               <div
-                class="formData checkbox-container">
+                class="formData">
                 <input
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
+                  name="checkbox"
                   checked
                 />
                 <label class="checkbox2-label" for="checkbox1">
@@ -204,7 +199,6 @@
                 </label>
                 
                 <br>
-                <span class="error"></span>
                 <input class="checkbox-input" type="checkbox" id="checkbox2" />
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
