@@ -187,7 +187,6 @@ main {
 .modal-body {
   padding: 15px 8%;
   margin: 15px auto;
-  position: relative;
 }
 
 label {
@@ -331,12 +330,6 @@ input {
   border: 0;
 }
 
-.btn-close {
-  position: absolute;
-  bottom: 2%;
-  left: 25%;
-  display: none;
-}
 /* custom select styles */
 .custom-select {
   position: relative;
@@ -393,15 +386,17 @@ input {
   right: 0;
   z-index: 99;
 }
+.validation {
+  display: none;
+  flex-direction: column;
+  height: 70vh
+}
 
 .validation-message {
-  position: absolute;
-  top: 45%;
-  transform: translateY(-45%);
-  left: 15%;
   text-align: center;
-  margin: 1rem;
+  margin: auto;
 }
+
 
 /* Hide the items when the select box is closed: */
 .select-hide {

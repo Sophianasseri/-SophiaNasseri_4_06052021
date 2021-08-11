@@ -147,21 +147,17 @@ const validate = (event) => {
         }
     }
   });
-  console.log(valid);
 
   // show validation message
   if (valid === true) {
-    form.style.visibility = "hidden";
+    form.style.display = "none";
+    const validation = document.querySelector(".validation");
+    validation.style.display = "flex";
     const closeBtn = document.querySelector(".btn-close");
-    closeBtn.style.display = "block";
-    const validationMessage = document.querySelector(".validation-message");
-    validationMessage.innerHTML =
-      "<p> Merci! <br> Votre réservation a été reçue.</p>";
     closeBtn.addEventListener("click", () => {
       modalbg.style.display = "none";
-      closeBtn.style.display = "none";
-      validationMessage.style.display = "none";
-      form.style.visibility = "visible";
+      validation.style.display = "none";
+      form.style.display = "block";
       form.reset();
     });
   }
