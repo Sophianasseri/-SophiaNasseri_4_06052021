@@ -58,7 +58,7 @@ const validate = (event) => {
 
     switch (inputName) {
       case "first":
-        if (inputValue.length < 2 || inputValue === "") {
+        if (inputValue.length < 2) {
           inputParent.setAttribute(
             "data-error",
             "Veuillez entrer au moins 2 caractères"
@@ -69,7 +69,7 @@ const validate = (event) => {
         }
         break;
       case "last":
-        if (inputValue.length < 2 || inputValue === "") {
+        if (inputValue.length < 2) {
           inputParent.setAttribute(
             "data-error",
             "Veuillez entrer au moins 2 caractères"
@@ -82,7 +82,7 @@ const validate = (event) => {
         break;
 
       case "email":
-        if (!inputValue.match(emailValid) || inputValue === "") {
+        if (!inputValue.match(emailValid)) {
           inputParent.setAttribute(
             "data-error",
             "Veuillez entrer un e-mail valide"

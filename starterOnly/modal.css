@@ -67,43 +67,6 @@ img {
   display: none;
 }
 
-@media screen and (max-width: 1108px) {
-  .topnav a {
-    display: none;
-  }
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-}
-
-@media screen and (max-width: 1108px) {
-  .topnav.responsive {
-    position: relative;
-  }
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-}
-
-@media screen and (max-width: 540px) {
-  .topnav a {
-    display: none;
-  }
-  .topnav a.icon {
-    float: right;
-    display: block;
-    margin-top: -15px;
-  }
-}
-
 main {
   font-size: 130%;
   font-weight: bolder;
@@ -389,14 +352,13 @@ input {
 .validation {
   display: none;
   flex-direction: column;
-  height: 70vh
+  height: 75vh;
 }
 
 .validation-message {
   text-align: center;
   margin: auto;
 }
-
 
 /* Hide the items when the select box is closed: */
 .select-hide {
@@ -486,7 +448,32 @@ footer {
   padding-right: 2vw;
   margin: 0 20px;
 }
-@media screen and (max-width: 1023px) {
+
+/*Laptop*/
+
+@media screen and (max-width: 1200px) {
+  .topnav.responsive {
+    position: relative;
+  }
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .topnav a {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+@media screen and (max-width: 992px) {
   .hero-section {
     display: block;
     box-shadow: unset;
@@ -502,10 +489,7 @@ footer {
   .hero-content .btn-signup {
     display: none;
   }
-  .hero-headline {
-    font-size: 4.5rem;
-    white-space: normal;
-  }
+
   .hero-text {
     width: unset;
     font-size: 1.5rem;
@@ -513,6 +497,9 @@ footer {
   .hero-img img {
     border-radius: 10px;
     margin-top: 40px;
+  }
+  .header-logo img {
+    padding: 12px 0;
   }
   .hero-section > .btn-signup {
     display: block;
@@ -522,6 +509,55 @@ footer {
   .copyrights {
     margin-top: 50px;
     text-align: center;
+  }
+}
+
+/*Tablet*/
+@media screen and (max-width: 904px) {
+  .header-logo img {
+    height: 60px;
+  }
+  .hero-headline {
+    font-size: 4.5rem;
+    white-space: normal;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero-headline {
+    font-size: 3.5rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  main {
+    margin: 1px 5px;
+  }
+  .hero-content {
+    padding: 5px;
+  }
+  .header-logo img {
+    height: 50px;
+  }
+
+  .hero-headline {
+    font-size: 2.7rem;
+  }
+  .hero-text {
+    font-size: 1rem;
+    margin-top: 25px;
+  }
+  .hero-img img {
+    margin-top: 15px;
+  }
+  .copyrights {
+    margin-top: 18px;
+  }
+  
+}
+@media screen  and (max-width: 424px) {
+  .hero-content {
+    min-width: 320px;
   }
 }
 
