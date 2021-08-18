@@ -13,14 +13,7 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeModal = document.querySelector(".close");
 const form = document.getElementById("suscribe");
-
-//Radio btn selection
-const location1 = document.getElementById("location1");
-const location2 = document.getElementById("location2");
-const location3 = document.getElementById("location3");
-const location4 = document.getElementById("location4");
-const location5 = document.getElementById("location5");
-const location6 = document.getElementById("location6");
+const locationEls = document.querySelectorAll("input[name='location']");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -117,14 +110,13 @@ const validate = (event) => {
         }
         break;
       case "location":
-        if (
-          !location1.checked &&
-          !location2.checked &&
-          !location3.checked &&
-          !location4.checked &&
-          !location5.checked &&
-          !location6.checked
-        ) {
+        let checkboxChecked = 0;
+        for (let i = 0; i < locationEls.length; i++) {
+          if (locationEls[i].checked) {
+            checkboxChecked++;
+          }
+        }
+        if (checkboxChecked === 0) {
           inputParent.setAttribute(
             "data-error",
             "Veuillez sélectionner une ville"
@@ -132,7 +124,6 @@ const validate = (event) => {
           valid = false;
         } else {
           inputParent.removeAttribute("data-error");
-          valid = true;
         }
         break;
       case "checkbox":
