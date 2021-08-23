@@ -40,7 +40,7 @@ const validate = (event) => {
 
   //Email regex
   const emailValid =
-    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
   //Form Conditions
 
@@ -130,7 +130,7 @@ const validate = (event) => {
         if (!inputElement.checked) {
           inputParent.setAttribute(
             "data-error",
-            "Veuillez accepter  les conditions d'utilisation"
+            "Veuillez accepter les conditions d'utilisation"
           );
           valid = false;
         } else {
