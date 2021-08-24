@@ -13,7 +13,15 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeModal = document.querySelector(".close");
 const form = document.getElementById("suscribe");
-const locationEls = document.querySelectorAll("input[name='location']");
+
+// Input Elements
+const firstNameEl = document.getElementById("first");
+const lastNameEl = document.getElementById("last");
+const emailEl = document.getElementById("email");
+const birthdateEl = document.getElementById("birthdate");
+const quantityEl = document.getElementById("quantity");
+const locationEl = document.querySelectorAll("input[name='location']");
+const checkbox1El = document.getElementById("checkbox1")
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -31,125 +39,157 @@ closeModal.addEventListener("click", () => {
 
 // Form submit validation
 
-const validate = (event) => {
+const checkfirstName = () => {
   let valid = false;
-  event.preventDefault();
+  const firstName = firstNameEl.value;
+  const firstNameParent = firstNameEl.parentElement;
+  if (firstName.length < 2) {
+    firstNameParent.setAttribute(
+      "data-error",
+      "Veuillez entrer au moins 2 caractères"
+    );
+  } else {
+    firstNameParent.removeAttribute("data-error");
+    valid = true;
+  }
+  return valid;
+};
 
-  //Select all inputs
-  let formInputs = document.querySelectorAll("input");
+const checklastName = () => {
+  let valid = false;
+  const lastName = lastNameEl.value;
+  const lastNameParent = lastNameEl.parentElement;
+  if (lastName.length < 2) {
+    lastNameParent.setAttribute(
+      "data-error",
+      "Veuillez entrer au moins 2 caractères"
+    );
+  } else {
+    lastNameParent.removeAttribute("data-error");
+    valid = true;
+  }
+  return valid;
+};
 
-  //Email regex
-  const emailValid =
-  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+//email regex
+const emailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-  //Form Conditions
+const checkemail = () => {
+  let valid = false;
+  const email = emailEl.value;
+  const emailParent = emailEl.parentElement;
+  if (!email.match(emailValid)) {
+    emailParent.setAttribute("data-error", "Veuillez entrer un e-mail valide");
+  } else {
+    emailParent.removeAttribute("data-error");
+    valid = true;
+  }
+  return valid;
+};
 
-  formInputs.forEach((inputElement) => {
-    const inputName = inputElement.name;
-    const inputValue = inputElement.value;
-    const inputParent = inputElement.parentElement;
+const checkBirthdate = () => {
+  let valid = false;
+  const birthdate = birthdateEl.value;
+  const birthdateParent = birthdateEl.parentElement;
+  if (birthdate === "" || birthdate.length > 10 ) {
+    birthdateParent.setAttribute(
+      "data-error",
+      "Veuillez entre une date de naissance valide"
+    );
+  } else {
+    birthdateParent.removeAttribute("data-error");
+    valid = true;
+  }
+  return valid;
+};
 
-    switch (inputName) {
-      case "first":
-        if (inputValue.length < 2) {
-          inputParent.setAttribute(
-            "data-error",
-            "Veuillez entrer au moins 2 caractères"
-          );
-        } else {
-          inputParent.removeAttribute("data-error");
-          valid = true;
-        }
-        break;
-      case "last":
-        if (inputValue.length < 2) {
-          inputParent.setAttribute(
-            "data-error",
-            "Veuillez entrer au moins 2 caractères"
-          );
-          valid = false;
-        } else {
-          inputParent.removeAttribute("data-error");
-          valid = true;
-        }
-        break;
+const checkParticipation = () => {
+    let valid = false;
+  const quantity = quantityEl.value;
+  const quantityParent = quantityEl.parentElement
+  if (quantity === "") {
+    quantityParent.setAttribute(
+      "data-error",
+      "Veuillez entrer un nombre"
+    );
+  } else {
+    quantityParent.removeAttribute("data-error");
+    valid = true;
+  }
+  return valid;
+};
 
-      case "email":
-        if (!inputValue.match(emailValid)) {
-          inputParent.setAttribute(
-            "data-error",
-            "Veuillez entrer un e-mail valide"
-          );
-          valid = false;
-        } else {
-          inputParent.removeAttribute("data-error");
-          valid = true;
-        }
-        break;
-
-      case "birthdate":
-        if (inputValue === "") {
-          inputParent.setAttribute(
-            "data-error",
-            "Veuillez entre une date de naissance"
-          );
-          valid = false;
-        } else {
-          inputParent.removeAttribute("data-error");
-          valid = true;
-        }
-        break;
-
-      case "quantity":
-        if (inputValue === "") {
-          inputParent.setAttribute("data-error", "Veuillez entre un nombre");
-          valid = false;
-        } else {
-          inputParent.removeAttribute("data-error");
-          valid = true;
-        }
-        break;
-      case "location":
-        let checkboxChecked = 0;
-        for (let i = 0; i < locationEls.length; i++) {
-          if (locationEls[i].checked) {
-            checkboxChecked++;
-          }
-        }
-        if (checkboxChecked === 0) {
-          inputParent.setAttribute(
-            "data-error",
-            "Veuillez sélectionner une ville"
-          );
-          valid = false;
-        } else {
-          inputParent.removeAttribute("data-error");
-        }
-        break;
-      case "checkbox":
-        if (!inputElement.checked) {
-          inputParent.setAttribute(
-            "data-error",
-            "Veuillez accepter les conditions d'utilisation"
-          );
-          valid = false;
-        } else {
-          inputParent.removeAttribute("data-error");
-        }
+const checkCity = () => {
+  let valid = false;
+  const locationParent = document.querySelector(".radio-btn");
+  let checkboxChecked = 0;
+  for (let i = 0; i < locationEl.length; i++) {
+    if (locationEl[i].checked) {
+      checkboxChecked++;
     }
-  });
+  }
+  if (checkboxChecked === 0) {
+    locationParent.setAttribute(
+      "data-error",
+      "Veuillez sélectionner une ville"
+    );
+  } else {
+    locationParent.removeAttribute("data-error");
+    valid = true;
+  }
+  return valid;
+};
 
-  // show validation message
-  if (valid === true) {
-    form.style.display = "none";
-    const validation = document.querySelector(".validation");
-    validation.style.display = "flex";
-    const closeBtn = document.querySelector(".btn-close");
-    closeBtn.addEventListener("click", () => {
-      modalbg.style.display = "none";
-      validation.style.display = "none";
-      form.style.display = "block";
-      form.reset();
-    });
+const checkCondition = () => {
+  let valid = false;
+const checkboxParent = checkbox1El.parentElement
+if (!checkbox1El.checked) {
+  checkboxParent.setAttribute(
+    "data-error",
+    "Veuillez accepter les conditions d'utililisation"
+  );
+} else {
+  checkboxParent.removeAttribute("data-error");
+  valid = true;
+}
+return valid;
+};
+
+const validationMessage = () => {
+  form.style.display = "none";
+  const validation = document.querySelector(".validation");
+  validation.style.display = "flex";
+  const closeBtn = document.querySelector(".btn-close");
+  closeBtn.addEventListener("click", () => {
+    modalbg.style.display = "none";
+    validation.style.display = "none";
+    form.style.display = "block";
+    form.reset();
+  });
+};
+
+const validate = (e) => {
+  e.preventDefault();
+
+  const firstNameValidation = checkfirstName();
+  const lastNameValidation = checklastName();
+  const emailValidation = checkemail();
+  const birthdateValidation = checkBirthdate();
+  const participationValidation = checkParticipation();
+  const cityValidation = checkCity();
+  const conditionValidation = checkCondition();
+
+  const formValidaton =
+    firstNameValidation &&
+    lastNameValidation &&
+    emailValidation &&
+    birthdateValidation &&
+    participationValidation &&
+    cityValidation &&
+    conditionValidation;
+
+  if (formValidaton) {
+    validationMessage();
   }
 };
+
