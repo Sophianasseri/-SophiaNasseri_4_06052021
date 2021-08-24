@@ -87,11 +87,17 @@ const checkemail = () => {
   return valid;
 };
 
+
+
+
+
 const checkBirthdate = () => {
   let valid = false;
   const birthdate = birthdateEl.value;
+  const today = Date.now()
+  const birthdateParse = Date.parse(birthdate)
   const birthdateParent = birthdateEl.parentElement;
-  if (birthdate === "" || birthdate.length > 10) {
+  if (birthdate === "" || birthdateParse >= today) {
     birthdateParent.setAttribute(
       "data-error",
       "Veuillez entre une date de naissance valide"
@@ -164,8 +170,7 @@ const validationMessage = () => {
     form.reset();
   });
 };
-
-const validate = (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const firstNameValidation = checkfirstName();
@@ -188,4 +193,6 @@ const validate = (e) => {
   if (formValidaton) {
     validationMessage();
   }
-};
+});
+
+
