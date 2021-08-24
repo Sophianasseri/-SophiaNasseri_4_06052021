@@ -21,7 +21,7 @@ const emailEl = document.getElementById("email");
 const birthdateEl = document.getElementById("birthdate");
 const quantityEl = document.getElementById("quantity");
 const locationEl = document.querySelectorAll("input[name='location']");
-const checkbox1El = document.getElementById("checkbox1")
+const checkbox1El = document.getElementById("checkbox1");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -91,7 +91,7 @@ const checkBirthdate = () => {
   let valid = false;
   const birthdate = birthdateEl.value;
   const birthdateParent = birthdateEl.parentElement;
-  if (birthdate === "" || birthdate.length > 10 ) {
+  if (birthdate === "" || birthdate.length > 10) {
     birthdateParent.setAttribute(
       "data-error",
       "Veuillez entre une date de naissance valide"
@@ -104,14 +104,11 @@ const checkBirthdate = () => {
 };
 
 const checkParticipation = () => {
-    let valid = false;
+  let valid = false;
   const quantity = quantityEl.value;
-  const quantityParent = quantityEl.parentElement
+  const quantityParent = quantityEl.parentElement;
   if (quantity === "") {
-    quantityParent.setAttribute(
-      "data-error",
-      "Veuillez entrer un nombre"
-    );
+    quantityParent.setAttribute("data-error", "Veuillez entrer un nombre");
   } else {
     quantityParent.removeAttribute("data-error");
     valid = true;
@@ -142,17 +139,17 @@ const checkCity = () => {
 
 const checkCondition = () => {
   let valid = false;
-const checkboxParent = checkbox1El.parentElement
-if (!checkbox1El.checked) {
-  checkboxParent.setAttribute(
-    "data-error",
-    "Veuillez accepter les conditions d'utililisation"
-  );
-} else {
-  checkboxParent.removeAttribute("data-error");
-  valid = true;
-}
-return valid;
+  const checkboxParent = checkbox1El.parentElement;
+  if (!checkbox1El.checked) {
+    checkboxParent.setAttribute(
+      "data-error",
+      "Veuillez accepter les conditions d'utililisation"
+    );
+  } else {
+    checkboxParent.removeAttribute("data-error");
+    valid = true;
+  }
+  return valid;
 };
 
 const validationMessage = () => {
@@ -192,4 +189,3 @@ const validate = (e) => {
     validationMessage();
   }
 };
-
