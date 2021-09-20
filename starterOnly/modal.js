@@ -38,34 +38,14 @@ closeModal.addEventListener("click", () => {
 });
 
 // Form submit validation
-
-const checkfirstName = () => {
+const checkTextInput = (input) => {
   let valid = false;
-  const firstName = firstNameEl.value;
-  const firstNameParent = firstNameEl.parentElement;
-  if (firstName.length < 2) {
-    firstNameParent.setAttribute(
-      "data-error",
-      "Veuillez entrer au moins 2 caractères"
-    );
+  const value = input.value;
+  const parent = input.parentElement;
+  if (value.length < 2) {
+    parent.setAttribute("data-error", "Veuillez entrer au moins 2 caractères");
   } else {
-    firstNameParent.removeAttribute("data-error");
-    valid = true;
-  }
-  return valid;
-};
-
-const checklastName = () => {
-  let valid = false;
-  const lastName = lastNameEl.value;
-  const lastNameParent = lastNameEl.parentElement;
-  if (lastName.length < 2) {
-    lastNameParent.setAttribute(
-      "data-error",
-      "Veuillez entrer au moins 2 caractères"
-    );
-  } else {
-    lastNameParent.removeAttribute("data-error");
+    parent.removeAttribute("data-error");
     valid = true;
   }
   return valid;
@@ -87,15 +67,11 @@ const checkemail = () => {
   return valid;
 };
 
-
-
-
-
 const checkBirthdate = () => {
   let valid = false;
   const birthdate = birthdateEl.value;
-  const today = Date.now()
-  const birthdateParse = Date.parse(birthdate)
+  const today = Date.now();
+  const birthdateParse = Date.parse(birthdate);
   const birthdateParent = birthdateEl.parentElement;
   if (birthdate === "" || birthdateParse >= today) {
     birthdateParent.setAttribute(
@@ -173,8 +149,8 @@ const validationMessage = () => {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const firstNameValidation = checkfirstName();
-  const lastNameValidation = checklastName();
+  const firstNameValidation = checkTextInput(firstNameEl);
+  const lastNameValidation = checkTextInput(lastNameEl);
   const emailValidation = checkemail();
   const birthdateValidation = checkBirthdate();
   const participationValidation = checkParticipation();
@@ -194,5 +170,3 @@ form.addEventListener("submit", (e) => {
     validationMessage();
   }
 });
-
-
